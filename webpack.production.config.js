@@ -14,13 +14,15 @@ module.exports = Object.assign(CONFIG, {
                 exclude: ['node_modules'],
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: {
-						loader: 'css-loader',
-						options: {
-							importLoaders: 1,
-							sourceMap: true,
-						}
-					},
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1,
+                                sourceMap: true,
+                            }
+                        }
+                    ]
                 })
             }
         ]

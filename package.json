@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.development.config.js --progress --colors",
-    "prod": "webpack --progress --colors",
+    "prod": "webpack --config webpack.production.config.js -p --progress --colors",
     "lint": "tslint *.{ts,tsx}",
     "test": "echo \"Warning: no test specified\""
   },
