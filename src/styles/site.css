@@ -3,6 +3,7 @@
 }
 
 html, body, #root {
+	font-family: sans-serif;
     height: 100%;
     overflow-y: overlay;
     background-color: var(--background);
@@ -32,5 +33,6 @@ main {
 }
 
 footer {
+    padding-top: 1rem;
     grid-area: footer;
 }
