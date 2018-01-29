@@ -1,6 +1,11 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
 import { Emoji } from '../types'
+import Footer from './Footer'
+
+const copy: (s: string) => void = require('copy-text-to-clipboard')
+
+import '../styles/app.css'
 
 type State = {
 	query: string
@@ -28,27 +33,31 @@ class App extends React.Component<{}, State> {
 	}
 
 	render () {
-		const { query, emoji } = this.state
-		const emojis = emoji.filter(e =>
-			e.aliases.includes(query) ||
-			e.category.includes(query) ||
-			e.description.includes(query) ||
+		const { query } = this.state
+		const emojis = this.state.emoji.filter(e =>
 			e.emoji.includes(query) ||
-			e.tags.includes(query)
+			e.description.includes(query) ||
+			e.category.includes(query) ||
+			e.aliases.some(alias => alias.includes(query)) ||
+			e.tags.some(tag => tag.includes(query))
 		)
 		return (
-			<div>
-				<h1>Emoji Keyboard</h1>
-				<div>
-					<input onChange={e => this.setState({ query: e.target.value })} value={query} />
-				</div>
-				<div className="emojis">
-					{emojis.map(e =>
-						<div key={e.id} className="emoji">
-							{e.emoji}
-						</div>
-					)}
-				</div>
+			<div id="app">
+				<main>
+					<h1 className="title">Emoji Keyboard</h1>
+					<div>
+						<input onChange={e => this.setState({ query: e.target.value })} value={query} placeholder="Search emojis" />
+					</div>
+					<br />
+					<div className="emojis">
+						{emojis.map(e =>
+							<button key={e.id} className="emoji" onClick={() => copy(e.emoji)}>
+								{e.emoji}
+							</button>
+						)}
+					</div>
+				</main>
+				<Footer/>
 			</div>
 		)
 	}

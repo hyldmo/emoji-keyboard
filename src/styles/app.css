@@ -1,0 +1,38 @@
+.title {
+	font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 0.5rem;
+}
+
+input {
+	width: 100%;
+	border: 2px solid #D3D3D3;
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+	outline: 0;
+}
+
+.emojis {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+@media (max-width: 800px) {
+    .emojis {
+		justify-content: space-around;
+	}
+}
+
+.emoji {
+	font-size: 1.5rem;
+	padding: 0.5rem;
+	width: 50px;
+	cursor: pointer;
+	background: none;
+	border: none;
+}
+
+.emoji:hover {
+	background-color:#D3D3D3;
+}

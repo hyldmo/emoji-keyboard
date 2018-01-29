@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body, #root {
+    height: 100%;
+    overflow-y: overlay;
+    background-color: var(--background);
+    color: var(--text-color);
+}
+
+#app {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-areas: "left main   right"
+                         "left footer right";
+
+    grid-template-rows: 1fr 4rem;
+    grid-template-columns: auto 800px auto;
+}
+
+@media (max-width: 800px) {
+    #app {
+        grid-template-columns: 0 100% 0;
+        padding: 1rem;
+    }
+}
+
+main {
+	grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+}
