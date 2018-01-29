@@ -1,11 +1,11 @@
 {
   "name": "emoji-keyboard",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.development.config.js --progress --colors",
-    "prod": "webpack --config webpack.production.config.js -p --progress --colors",
+    "prod": "webpack --config webpack.production.config.js --progress --colors",
     "lint": "tslint *.{ts,tsx}",
     "test": "echo \"Warning: no test specified\""
   },
@@ -16,6 +16,8 @@
   "author": "eivindh",
   "license": "MIT",
   "dependencies": {
+    "@types/copy-text-to-clipboard": "^1.0.0",
+    "copy-text-to-clipboard": "^1.0.4",
     "normalize.css": "^7.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

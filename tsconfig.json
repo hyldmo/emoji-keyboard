@@ -7,6 +7,7 @@
 		"strict": false,
 		"noUnusedLocals": true,
 		"noStrictGenericChecks": false,
+		"allowSyntheticDefaultImports": true,
 		"module": "commonjs",
 		"target": "es5",
 		"lib": [
