@@ -5,9 +5,12 @@
 html, body, #root {
 	font-family: sans-serif;
     height: 100%;
-    overflow-y: overlay;
     background-color: var(--background);
     color: var(--text-color);
+}
+
+html {
+    overflow-y: scroll;
 }
 
 #app {
