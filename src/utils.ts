@@ -1,12 +1,13 @@
 import { Emoji, Save } from './types'
 
 export function filterEmoji (emoji: Emoji, query: string) {
+	query = query.toLocaleLowerCase()
 	return (
 		emoji.emoji.includes(query) ||
-		emoji.description.includes(query) ||
-		emoji.category.includes(query) ||
-		emoji.aliases.some(alias => alias.includes(query)) ||
-		emoji.tags.some(tag => tag.includes(query))
+		emoji.description.toLocaleLowerCase().includes(query) ||
+		emoji.category.toLocaleLowerCase().includes(query) ||
+		emoji.aliases.some(alias => alias.toLocaleLowerCase().includes(query)) ||
+		emoji.tags.some(tag => tag.toLocaleLowerCase().includes(query))
 	)
 }
 

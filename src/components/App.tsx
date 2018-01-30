@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
 import { Emoji, Favorite, Save } from '../types'
+import { filterEmoji, load, save } from '../utils'
+import EmojiButton from './Emoji'
 import Footer from './Footer'
-
 const copy: (s: string) => void = require('copy-text-to-clipboard')
 
 import '../styles/app.css'
-import { filterEmoji, load, save } from '../utils'
 
 type State = {
 	query: string
@@ -60,7 +60,7 @@ class App extends React.Component<{}, State> {
 		return (
 			<div id="app">
 				<main>
-					<h1 className="title">Emoji Keyboard</h1>
+					<h1 className="title">Emoji Keyboard <small>(Click to copy)</small></h1>
 					<div>
 						<input onChange={e => this.setState({ query: e.target.value })} value={query} placeholder="Search emojis" />
 					</div>
@@ -69,21 +69,16 @@ class App extends React.Component<{}, State> {
 							{favorites.length > 0 && <h2>Most used</h2>}
 							<div className="emojis favorites">
 								{favorites.map(e =>
-									<button key={e.id} className="emoji" onClick={() => this.handleEmojiClick(e)}>
-										{e.emoji}
-									</button>
+									<EmojiButton key={e.id} emoji={e} onClick={() => this.handleEmojiClick(e)} />
 								)}
 							</div>
 						</div>
 					)}
-					<br />
 					{query.length > 0
 						? (
 							<div className="emojis">
 								{emojis.map(e =>
-									<button key={e.id} className="emoji" onClick={() => this.handleEmojiClick(e)}>
-										{e.emoji}
-									</button>
+									<EmojiButton key={e.id} emoji={e} onClick={() => this.handleEmojiClick(e)} />
 								)}
 							</div>
 						)
@@ -92,9 +87,7 @@ class App extends React.Component<{}, State> {
 							<h2>{category}</h2>
 							<div className="emojis">
 								{emojis.filter(e => e.category === category).map(e =>
-									<button key={e.id} className="emoji" onClick={() => this.handleEmojiClick(e)}>
-										{e.emoji}
-									</button>
+									<EmojiButton key={e.id} emoji={e} onClick={() => this.handleEmojiClick(e)} />
 								)}
 							</div>
 						</div>
