@@ -1,24 +1,27 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
-import { Emoji } from '../types'
+import { Emoji, Favorite, Save } from '../types'
 import Footer from './Footer'
 
 const copy: (s: string) => void = require('copy-text-to-clipboard')
 
 import '../styles/app.css'
+import { filterEmoji, load, save } from '../utils'
 
 type State = {
 	query: string
 	emoji: Emoji[]
+	saveState: Save
 }
 
 class App extends React.Component<{}, State> {
-	constructor (props) {
+	constructor (props: any) {
 		super(props)
-
+		const saveState = load()
 		this.state = {
 			query: '',
-			emoji: []
+			emoji: [],
+			saveState
 		}
 	}
 
@@ -32,15 +35,28 @@ class App extends React.Component<{}, State> {
 		})
 	}
 
+	handleEmojiClick (emoji: Emoji) {
+		const { saveState } = this.state
+		copy(emoji.emoji)
+		const fav = saveState.favorites[emoji.id]
+		const newEmoji = fav || { ...emoji, used: 0 }
+		newEmoji.used += 1
+		saveState.favorites[emoji.id] = newEmoji
+		save(saveState)
+		this.setState({ saveState })
+	}
+
 	render () {
-		const { query } = this.state
-		const emojis = this.state.emoji.filter(e =>
-			e.emoji.includes(query) ||
-			e.description.includes(query) ||
-			e.category.includes(query) ||
-			e.aliases.some(alias => alias.includes(query)) ||
-			e.tags.some(tag => tag.includes(query))
-		)
+		const { query, saveState } = this.state
+		const emojis = this.state.emoji.filter(e => filterEmoji(e, query))
+		const favorites = Object
+			.values(saveState.favorites)
+			.map(a => a as Favorite)
+			.sort((a, b) => b.used - a.used)
+
+		const categories = emojis
+			.map(e => e.category)
+			.filter((value, index, self) => self.indexOf(value) === index)
 		return (
 			<div id="app">
 				<main>
@@ -48,14 +64,41 @@ class App extends React.Component<{}, State> {
 					<div>
 						<input onChange={e => this.setState({ query: e.target.value })} value={query} placeholder="Search emojis" />
 					</div>
+					{query.length === 0 && (
+						<div>
+							{favorites.length > 0 && <h2>Most used</h2>}
+							<div className="emojis favorites">
+								{favorites.map(e =>
+									<button key={e.id} className="emoji" onClick={() => this.handleEmojiClick(e)}>
+										{e.emoji}
+									</button>
+								)}
+							</div>
+						</div>
+					)}
 					<br />
-					<div className="emojis">
-						{emojis.map(e =>
-							<button key={e.id} className="emoji" onClick={() => copy(e.emoji)}>
-								{e.emoji}
-							</button>
-						)}
-					</div>
+					{query.length > 0
+						? (
+							<div className="emojis">
+								{emojis.map(e =>
+									<button key={e.id} className="emoji" onClick={() => this.handleEmojiClick(e)}>
+										{e.emoji}
+									</button>
+								)}
+							</div>
+						)
+						: categories.map(category => (
+						<div key={category}>
+							<h2>{category}</h2>
+							<div className="emojis">
+								{emojis.filter(e => e.category === category).map(e =>
+									<button key={e.id} className="emoji" onClick={() => this.handleEmojiClick(e)}>
+										{e.emoji}
+									</button>
+								)}
+							</div>
+						</div>
+					))}
 				</main>
 				<Footer/>
 			</div>
