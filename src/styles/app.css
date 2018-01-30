@@ -19,7 +19,7 @@ input {
 
 @media (max-width: 800px) {
     .emojis:not(.favorites) {
-		justify-content: space-around;
+		justify-content: space-between;
 	}
 }
 
