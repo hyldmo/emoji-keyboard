@@ -17,12 +17,6 @@ input {
 	flex-flow: row wrap;
 }
 
-@media (max-width: 800px) {
-    .emojis {
-		justify-content: space-around;
-	}
-}
-
 .emoji {
 	font-size: 1.5rem;
 	padding: 0.5rem;
