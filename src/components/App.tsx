@@ -53,6 +53,7 @@ class App extends React.Component<{}, State> {
 			.values(saveState.favorites)
 			.map(a => a as Favorite)
 			.sort((a, b) => b.used - a.used)
+			.slice(0, 32)
 
 		const categories = emojis
 			.map(e => e.category)
