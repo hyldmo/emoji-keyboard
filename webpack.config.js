@@ -41,6 +41,7 @@ module.exports = {
                 .map(name => name.charAt(0).toUpperCase() + name.slice(1))
                 .join(' '),
             template: 'templates/index.ejs',
+            favicon: 'static/favicon.ico'
 		}),
 		new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
