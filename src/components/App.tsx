@@ -61,9 +61,12 @@ class App extends React.Component<{}, State> {
 		return (
 			<>
 				<main>
-					<h1 className="title">Emoji Keyboard <small>(Click to copy)</small></h1>
+					<h1 className="title">Emoji Keyboard</h1>
 					<div>
-						<input onChange={e => this.setState({ query: e.target.value })} value={query} placeholder="Search emojis" />
+						<input 
+							placeholder="Search emojis (and click to copy)"
+							onChange={e => this.setState({ query: e.target.value })} value={query} 
+						 />
 					</div>
 					{query.length === 0 && (
 						<div>
