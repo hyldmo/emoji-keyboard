@@ -10,7 +10,7 @@ module.exports = Object.assign(CONFIG, {
         publicPath: `http://localhost:${port}/`,
     }),
 
-    devtool: 'eval-source-map',
+    devtool: 'inline-source-map',
 
     devServer: {
         historyApiFallback: true,
