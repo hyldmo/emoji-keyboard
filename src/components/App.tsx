@@ -43,7 +43,7 @@ class App extends React.Component<{}, State> {
 		newEmoji.used += 1
 		saveState.favorites[emoji.id] = newEmoji
 		save(saveState)
-		this.setState({ saveState })
+		this.setState({ saveState, query: '' })
 	}
 
 	render () {
