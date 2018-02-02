@@ -59,7 +59,7 @@ class App extends React.Component<{}, State> {
 			.map(e => e.category)
 			.filter((value, index, self) => self.indexOf(value) === index)
 		return (
-			<div id="app">
+			<>
 				<main>
 					<h1 className="title">Emoji Keyboard <small>(Click to copy)</small></h1>
 					<div>
@@ -95,7 +95,7 @@ class App extends React.Component<{}, State> {
 					))}
 				</main>
 				<Footer/>
-			</div>
+			</>
 		)
 	}
 }
