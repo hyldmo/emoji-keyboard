@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-html, body, #root {
+html, body {
 	font-family: sans-serif;
     height: 100%;
     background-color: var(--background);
@@ -15,6 +15,7 @@ html {
 
 #app {
     display: grid;
+    padding: 1rem;
     width: 100%;
     height: 100%;
     grid-template-areas: "left main   right"
@@ -24,10 +25,9 @@ html {
     grid-template-columns: auto 800px auto;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 832px) {
     #app {
         grid-template-columns: 0 100% 0;
-        padding: 1rem;
     }
 }
 
@@ -36,6 +36,10 @@ main {
 }
 
 footer {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
     padding-top: 1rem;
     grid-area: footer;
 }

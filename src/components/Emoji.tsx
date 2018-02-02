@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Emoji } from '../types'
+import Tooltip from './Tooltip'
 
 import '../styles/emoji.css'
 
@@ -29,24 +30,12 @@ class EmojiButton extends React.Component<Props, State> {
 					{emoji.emoji}
 				</button>
 				{hover && (
-					<ul className="tooltip">
-						<li>
-							<strong>Category: </strong><span>{emoji.category}</span>
-						</li>
-						<li>
-							<strong>Description: </strong><span>{emoji.description}</span>
-						</li>
-						{emoji.aliases.length > 0 &&
-						<li>
-							<strong>Also known as: </strong><span>{emoji.aliases.join(', ')}</span>
-						</li>
-						}
-						{emoji.tags.length > 0 &&
-						<li>
-							<strong>Tags: </strong><span>{emoji.tags.join(', ')}</span>
-						</li>
-						}
-					</ul>
+					<Tooltip values={[
+						['Description', emoji.description],
+						['Category', emoji.category],
+						['Also known as', emoji.aliases.join(', '), emoji.aliases.length > 0],
+						['Tags', emoji.tags.join(', '), emoji.tags.length > 0]
+					]} />
 				)}
 			</div>
 		)

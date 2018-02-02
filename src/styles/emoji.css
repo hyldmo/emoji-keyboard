@@ -8,7 +8,7 @@
 }
 
 .emoji:hover {
-	background-color:#D3D3D3;
+	background-color: gainsboro;
 }
 
 .emojicontainer {
@@ -26,5 +26,4 @@
 	background-color: white;
 	border: 2px solid gainsboro;
 	border-radius: 0.5rem;
-
 }

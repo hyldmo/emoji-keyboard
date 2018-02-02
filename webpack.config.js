@@ -26,6 +26,10 @@ module.exports = {
 				loader: 'awesome-typescript-loader',
 				exclude: ['node_modules'],
             },
+            {
+                test: /\.svg$/,
+                loaders: ['react-svg-loader']
+            }
         ],
     },
 
@@ -40,9 +44,9 @@ module.exports = {
 		}),
 		new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.PACKAGE_NAME': JSON.stringify(packageJSON.name),
-            'process.env.PACKAGE_VERSION': JSON.stringify(packageJSON.version)
+            'process.env.PACKAGE_VERSION': JSON.stringify(packageJSON.version),
+            'process.env.REPO_URL': JSON.stringify(packageJSON.repository.url)
         }),
     ]
 };

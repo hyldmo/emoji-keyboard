@@ -2,6 +2,7 @@
 
 const CONFIG = require('./webpack.config');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = Object.assign(CONFIG, {
     devtool: 'source-map',
@@ -30,6 +31,9 @@ module.exports = Object.assign(CONFIG, {
 
     plugins: [
         new ExtractTextPlugin('styles.css'),
+        new UglifyJsPlugin({
+            sourceMap: true
+        }),
         ...CONFIG.plugins
 	]
 });

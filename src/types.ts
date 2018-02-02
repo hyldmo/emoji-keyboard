@@ -14,3 +14,7 @@ export type Favorite = Emoji & { used: number }
 export type Save = {
 	favorites: { [key: number]: Favorite | undefined }
 }
+
+export type Tuple<T1, T2> = [T1, T2]
+export type Triple<T1, T2, T3> = [T1, T2, T3]
+
